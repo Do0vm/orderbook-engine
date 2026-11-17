@@ -16,7 +16,7 @@ jobs:
           - { os: ubuntu-latest, compiler: clang, cxx: clang++ }
           - { os: windows-latest, compiler: msvc, cxx: cl }
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Configure
         run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Release ${{ matrix.os != 'windows-latest' && format('-DCMAKE_CXX_COMPILER={0}', matrix.cxx) || '' }}
       - name: Build
@@ -33,7 +33,7 @@ jobs:
   sanitizers:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Build with ASan + UBSan
         run: |
           cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DOBE_SANITIZE=ON -DCMAKE_CXX_COMPILER=clang++
